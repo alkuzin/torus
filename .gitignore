@@ -1,0 +1,4 @@
+libtorus.a
+*.o
+*.py
+main*
