@@ -16,6 +16,8 @@ namespace tlib
 	double mode(const std::vector<double> &data);	
 	
 	double dispersion(const std::vector<double> &data);	
+	
+	double std_deviation(const std::vector<double> &data);	
 }
 
 #endif  // TORUS_STATISTICS_H

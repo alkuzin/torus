@@ -72,4 +72,12 @@ namespace tlib
 
 		return (sum / data.size());
 	}
+	
+	double std_deviation(const std::vector<double> &data) 
+	{
+		if (data.empty())
+        	throw std::invalid_argument("data is empty");
+
+		return std::sqrt(tlib::dispersion(data));
+	}
 }
