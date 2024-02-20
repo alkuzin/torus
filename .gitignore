@@ -2,3 +2,4 @@ libtorus.a
 *.o
 *.py
 main*
+*.swp
