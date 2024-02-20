@@ -8,6 +8,8 @@
 namespace tlib
 {
 	double mean(const std::vector<double> &data);	
+
+	double median(const std::vector<double> &data);	
 }
 
 #endif  // TORUS_STATISTICS_H
