@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <numeric>
 #include <vector>
+#include <cmath>
 #include <map>
 
 namespace tlib
@@ -13,6 +14,8 @@ namespace tlib
 	double median(const std::vector<double> &data);	
 
 	double mode(const std::vector<double> &data);	
+	
+	double dispersion(const std::vector<double> &data);	
 }
 
 #endif  // TORUS_STATISTICS_H

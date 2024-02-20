@@ -54,4 +54,22 @@ namespace tlib
 
     	return mode;
 	}
+	
+	double dispersion(const std::vector<double> &data)
+	{
+		if (data.empty())
+        	throw std::invalid_argument("data is empty");
+
+		double mean;
+		double sum;
+
+		mean = tlib::mean(data);
+		sum = 0;
+
+    	for (const auto& value : data) {
+			sum += std::pow(value - mean, 2);	
+		}
+
+		return (sum / data.size());
+	}
 }
