@@ -22,6 +22,8 @@ namespace tlib
 	double std_deviation(const std::vector<double> &data);
 
 	double quantile(std::vector<double> &data, const double quantile);
+	
+	double interquantile_range(std::vector<double> &data);
 }
 
 #endif  // TORUS_STATISTICS_H
