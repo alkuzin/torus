@@ -14,7 +14,7 @@ namespace tlib
 	double median(const std::vector<double> &data)
 	{
 		if (data.empty())
-        	throw std::invalid_argument("vector is empty");
+        	throw std::invalid_argument("data is empty");
 
 		double median;
 		size_t size;
@@ -79,5 +79,29 @@ namespace tlib
         	throw std::invalid_argument("data is empty");
 
 		return std::sqrt(tlib::dispersion(data));
+	}
+
+	double quantile(std::vector<double> &data, const double quantile)
+	{
+		if (data.empty() || quantile < 0.0 || quantile > 1.0)
+        	throw std::invalid_argument("data is empty or incorrect quantile");
+	
+		double lower_pos;
+		double upper_pos;
+		double lower_val;
+		double upper_val;
+		double pos;
+		double q;
+
+    	std::sort(data.begin(), data.end());
+
+    	pos = quantile * (data.size() - 1);
+    	lower_pos = (int)pos;
+    	upper_pos = lower_pos + 1;
+    	lower_val = data[lower_pos];
+    	upper_val = data[upper_pos];
+    	q = lower_val + (pos - lower_pos) * (upper_val - lower_val);
+
+    	return q;
 	}
 }
