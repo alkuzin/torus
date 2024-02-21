@@ -3,3 +3,4 @@ libtorus.a
 *.py
 main*
 *.swp
+third_party/
