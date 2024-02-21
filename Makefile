@@ -1,10 +1,8 @@
-CC = g++
-CFLAGS = -Wall -Wextra -Werror -g
+CC     = g++
+CFLAGS = -Wall -Wextra -Werror -g 
+NAME   = libtorus.a
 
-NAME = libtorus.a
-
-SRC = statistics
-
+SRC  = statistics
 SRCS = $(addsuffix .cpp, $(SRC))
 OBJS = $(addsuffix .o, 	 $(SRC))
 SRCS_PREFIXED = $(addprefix src/, $(SRCS))
