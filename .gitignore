@@ -6,4 +6,4 @@ main*
 third_party/
 *.png
 test*
-.dat
+*.dat
