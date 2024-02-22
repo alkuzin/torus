@@ -1,5 +1,5 @@
-#ifndef TORUS_STATISTICS_H
-#define TORUS_STATISTICS_H
+#ifndef TORUS_STATISTICS_HPP
+#define TORUS_STATISTICS_HPP
 
 #include <algorithm>
 #include <numeric>
@@ -26,4 +26,4 @@ namespace tlib
 	double interquantile_range(std::vector<double> &data);
 }
 
-#endif  // TORUS_STATISTICS_H
+#endif  // TORUS_STATISTICS_HPP
