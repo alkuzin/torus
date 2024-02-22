@@ -4,6 +4,5 @@ libtorus.a
 main*
 *.swp
 third_party/
-*.png
 test*
 *.dat
