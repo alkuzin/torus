@@ -38,7 +38,7 @@ namespace tlib
 
 	Plot::~Plot(void) 
 	{
-		cmd("e");
+		cmd("q");
 		fflush(plot_pipe);
 		pclose(plot_pipe);
 	}
