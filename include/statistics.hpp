@@ -22,31 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. 
 */
 
-#ifndef TORUS_PLOT_HPP
-#define TORUS_PLOT_HPP
-
-#include <iostream>
-#include <cstdarg>
-
-namespace tlib
-{
-	class Plot
-	{
-		FILE *plot_pipe;
-
-		public:
-			Plot(void);
-			Plot(const char *filename, int height, int width); // save as png 
-			~Plot();
-
-			void cmd(const char *fmt, ...);	
-
-		private:
-			void _init(void);
-	};
-}
-
-#endif // TORUS_PLOT_HPP
 #ifndef TORUS_STATISTICS_HPP
 #define TORUS_STATISTICS_HPP
 
@@ -56,22 +31,30 @@ namespace tlib
 #include <cmath>
 #include <map>
 
-#define EPSILON 0.0001
-
 namespace tlib
 {
+	// measure of central tendency of a finite set of numbers
 	double mean(const std::vector<double> &data);
 
+	// middle value separating the greater and 
+	// lesser halves of a data set
 	double median(const std::vector<double> &data);
 
+	// most frequent value in a data set
 	double mode(const std::vector<double> &data);
-	
+
+	// measure of spread of data
 	double dispersion(const std::vector<double> &data);
-	
+
+	// measure of the amount of variation of a 
+	// random variable expected about its mean
 	double std_deviation(const std::vector<double> &data);
 
+	// cut points dividing the range of a probability distribution into 
+	// continuous intervals with equal probabilities
 	double quantile(std::vector<double> &data, const double quantile);
 	
+	// measure of statistical dispersion
 	double interquantile_range(std::vector<double> &data);
 }
 

@@ -38,10 +38,12 @@ namespace tlib
 			Plot(void);
 			Plot(const char *filename, int height, int width); // save as png 
 			~Plot();
-
+			
+			// execute gnuplot commands
 			void cmd(const char *fmt, ...);	
 
 		private:
+			// initialize gnuplot
 			void _init(void);
 	};
 }

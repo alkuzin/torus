@@ -22,31 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. 
 */
 
-#ifndef TORUS_PLOT_HPP
-#define TORUS_PLOT_HPP
-
-#include <iostream>
-#include <cstdarg>
-
-namespace tlib
-{
-	class Plot
-	{
-		FILE *plot_pipe;
-
-		public:
-			Plot(void);
-			Plot(const char *filename, int height, int width); // save as png 
-			~Plot();
-
-			void cmd(const char *fmt, ...);	
-
-		private:
-			void _init(void);
-	};
-}
-
-#endif // TORUS_PLOT_HPP
 #ifndef TORUS_LIB_HPP
 #define TORUS_LIB_HPP
 
@@ -57,6 +32,7 @@ namespace tlib
 
 namespace tlib 
 {
+	// save dataset to file
 	void save(std::vector<double> &data, const char *filename);
 }
 
