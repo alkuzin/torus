@@ -56,6 +56,11 @@ namespace tlib
 	
 	// measure of statistical dispersion
 	double interquantile_range(std::vector<double> &data);
+
+	// A positive skewness means the tail on the right side 
+	// of the distribution is longer, while a negative skewness 
+	// indicates the tail on the left side is longer.
+	double skewness(std::vector<double> &data);
 }
 
 #endif  // TORUS_STATISTICS_HPP

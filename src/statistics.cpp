@@ -22,8 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. 
 */
 
-#include <iostream>
 #include "../include/statistics.hpp"
+#include <iostream>
 
 namespace tlib 
 {
@@ -134,5 +134,23 @@ namespace tlib
 		quantile_3 = tlib::quantile(data, 0.75);
 		
 		return (quantile_3 - quantile_1);
+	}
+	
+	double skewness(std::vector<double> &data)
+	{
+		double std, sum, size, mean;
+		
+		if (data.empty())
+        	throw std::invalid_argument("data is empty");
+
+		sum  = 0;
+		size = data.size();
+		std  = tlib::std_deviation(data);
+		mean = tlib::mean(data);
+
+    	for (const auto& value : data)
+			sum += std::pow(value - mean, 3);	
+
+		return ((1/(size * std::pow(std, 3))) * sum);
 	}
 }
