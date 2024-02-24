@@ -22,9 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. 
 */
 
+#include "../include/torus.hpp"
 #include <fstream>
 #include <string>
-#include "../include/torus.hpp"
 
 namespace tlib 
 {
@@ -33,10 +33,32 @@ namespace tlib
 		std::ofstream fin;
 
 		fin.open(filename, std::ios::out);
+		
+		if(!fin.is_open())
+			throw std::runtime_error("tlib::save: failed to open file");
 
 		for(double value : data)
 			fin << value << std::endl;
 
 		fin.close();
+	}
+	
+	void load(std::vector<double> &data, const char *filename)
+	{
+		std::ifstream fout;
+		std::string   line;
+
+		fout.open(filename, std::ios::in);
+		
+		if(!fout.is_open())
+			throw std::runtime_error("tlib::load: failed to open file");
+	
+		// skip first line
+		std::getline(fout, line);
+
+		while(std::getline(fout, line))
+			data.push_back(std::stod(line));	
+	
+		fout.close();	
 	}
 }
