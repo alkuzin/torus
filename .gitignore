@@ -6,3 +6,4 @@ main*
 third_party/
 test*
 *.dat
+*.csv
