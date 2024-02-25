@@ -61,6 +61,10 @@ namespace tlib
 	// of the distribution is longer, while a negative skewness 
 	// indicates the tail on the left side is longer.
 	double skewness(std::vector<double> &data);
+	
+	// Normal distribution/Gaussian distribution is a type of 
+	// continuous probability distribution for a real-valued random variable.
+	double normal(double x, double mean, double std);
 }
 
 #endif  // TORUS_STATISTICS_HPP

@@ -153,4 +153,14 @@ namespace tlib
 
 		return ((1/(size * std::pow(std, 3))) * sum);
 	}
+	
+	double normal(double x, double mean, double std) 
+	{
+		double exponent, denominator;
+
+		exponent = -0.5 * std::pow((x - mean) / std, 2);
+		denominator = std::sqrt(2 * M_PI) * std;
+
+		return (1/denominator) * std::exp(exponent);
+	}
 }
