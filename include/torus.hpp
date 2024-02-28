@@ -35,6 +35,9 @@ namespace tlib
 	// save dataset to file
 	void save(std::vector<double> &data, const char *filename);
 	
+	// save x & y axis to file
+	void save_xy(std::vector<double> &x, std::vector<double> &y, const char *filename);
+	
 	// load dataset from file (.txt/.dat/.csv) skipping first line
 	void load(std::vector<double> &data, const char *filename);
 }

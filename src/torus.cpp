@@ -43,6 +43,26 @@ namespace tlib
 		fin.close();
 	}
 	
+	void save_xy(std::vector<double> &x, std::vector<double> &y, const char *filename)
+	{
+		std::ofstream fin;
+		size_t size;
+
+		size = x.size();
+		if(size != y.size())
+			throw std::runtime_error("tlib::save_xy: different sizes of x & y");
+
+		fin.open(filename, std::ios::out);
+		
+		if(!fin.is_open())
+			throw std::runtime_error("tlib::save_xy: failed to open file");
+
+		for(size_t i = 0; i < size; i++)
+			fin << x.at(i) << " " << y.at(i) << std::endl;
+
+		fin.close();
+	}
+	
 	void load(std::vector<double> &data, const char *filename)
 	{
 		std::ifstream fout;
