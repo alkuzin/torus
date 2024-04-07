@@ -65,6 +65,14 @@ namespace tlib
 	// Normal distribution/Gaussian distribution is a type of 
 	// continuous probability distribution for a real-valued random variable.
 	double normal(double x, double mean, double std);
+
+    // standart error of the mean
+    double sem(const std::vector<double> &data);
+
+    // Student's t-distribution is a continuous probability distribution that 
+    // generalizes the standard normal distribution.
+    // t - t-value, v - degrees of freedom
+    double t_distribution(double t, double v);
 }
 
 #endif  // TORUS_STATISTICS_HPP

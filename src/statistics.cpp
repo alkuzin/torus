@@ -163,4 +163,24 @@ namespace tlib
 
 		return (1/denominator) * std::exp(exponent);
 	}
+
+    double sem(const std::vector<double> &data)
+    {
+        double std, n;
+
+        std = tlib::std_deviation(data);
+        n   = data.size();
+
+        return (std / std::sqrt(n - 1));
+    }
+
+    double t_distribution(double t, double v)
+    {
+        double numerator, denominator;
+
+        numerator   = std::tgamma(0.5 * (v + 1));
+        denominator = std::sqrt(v * M_PI) * std::tgamma(0.5 * v);
+
+        return ((numerator / denominator) * std::pow(1 + ((t * t) / v), -(0.5 * (v + 1))));
+    }
 }
