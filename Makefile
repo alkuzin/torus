@@ -1,5 +1,5 @@
 CC     = g++
-CFLAGS = -Wall -Wextra -Werror -g 
+CFLAGS = -Wall -Wextra -Werror -g -I include/
 NAME   = libtorus.a
 
 SRC  = statistics plot torus
