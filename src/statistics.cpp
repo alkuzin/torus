@@ -1,28 +1,26 @@
-/*
-MIT License
+/* MIT License
+ *
+ * Copyright (c) 2024 Alexander (@alkuzin)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. */
 
-Copyright (c) 2024 Alexander 
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. 
-*/
-
-#include "../include/statistics.hpp"
+#include <torus/statistics.hpp>
 #include <iostream>
 
 namespace tlib 
@@ -46,9 +44,9 @@ namespace tlib
 		size = data.size();
 
 		if(size % 2 == 0)
-			median = (data.at((size / 2) - 1) + data.at(size / 2)) / 2;
+			median = ((data.at((size >> 1) - 1) + data.at(size >> 1))) / 2;
 		else
-			median = data.at(size / 2);
+			median = data.at(size >> 1);
 			
 		return median;
 	}
@@ -59,20 +57,20 @@ namespace tlib
         	throw std::invalid_argument("data is empty");
 		
 		std::map<double, int> frequency_map;
-    	int max_frequency;
+    	int    max_frequency;
 		double mode;
 
     	for (const auto& value : data) {
         	frequency_map[value]++;
 		}
     	
-		mode = data.at(0);
+		mode          = data.at(0);
 		max_frequency = 0;
     	
 		for (const auto& pair : frequency_map) {
         	if (pair.second > max_frequency) {
             	max_frequency = pair.second;
-            	mode = pair.first;
+            	mode          = pair.first;
         	}
    		}
 
@@ -87,11 +85,10 @@ namespace tlib
 		double mean, sum;
 
 		mean = tlib::mean(data);
-		sum = 0;
+		sum  = 0;
 
-    	for (const auto& value : data) {
-			sum += std::pow(value - mean, 2);	
-		}
+    	for (const auto& value : data)
+			sum += std::pow(value - mean, 2);
 
 		return (sum / data.size());
 	}
@@ -113,12 +110,12 @@ namespace tlib
 
     	std::sort(data.begin(), data.end());
 
-    	pos = quantile * (data.size() - 1);
+    	pos       = quantile * (data.size() - 1);
     	lower_pos = (int)pos;
     	upper_pos = lower_pos + 1;
     	lower_val = data[lower_pos];
     	upper_val = data[upper_pos];
-    	q = lower_val + (pos - lower_pos) * (upper_val - lower_val);
+    	q         = lower_val + (pos - lower_pos) * (upper_val - lower_val);
 
     	return q;
 	}
@@ -158,7 +155,7 @@ namespace tlib
 	{
 		double exponent, denominator;
 
-		exponent = -0.5 * std::pow((x - mean) / std, 2);
+		exponent    = -0.5 * std::pow((x - mean) / std, 2);
 		denominator = std::sqrt(2 * M_PI) * std;
 
 		return (1/denominator) * std::exp(exponent);
