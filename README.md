@@ -1,5 +1,5 @@
-# torus-lib
-Torus - math statistics library
+# Torus
+Torus - math statistics library for own projects
 
 <img src="res/torus.png">
 
@@ -22,15 +22,15 @@ Then move to library directory and build library:
 cd torus-lib/ && make all
 ```
 
-Then include the __`torus.h`__ header file in your project.
+Then include the __`torus.hpp`__ header file in your project.
 ```c
-#include "<path to your project>/include/torus.h"
-/* project code here */
+#include <torus/torus.hpp>
+// project code here
 ```
-Finaly compile your project, including __`libtorus.a`__ file.
+Finaly compile and run your project, including __`libtorus.a`__ file:
 
 ```console
-g++ main.cpp libtorus.a -o main
+g++ -I include/ main.cpp libtorus.a -o main && ./main
 ```
 
 To return everything to original state:
