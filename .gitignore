@@ -1,9 +1,7 @@
 libtorus.a
-*.o
-*.py
-main*
+.vscode/
 *.swp
-third_party/
-test*
 *.dat
 *.csv
+*.py
+*.o
