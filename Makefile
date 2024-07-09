@@ -1,29 +1,22 @@
-CC     = g++
-CFLAGS = -Wall -Wextra -Werror -g -I include/
-NAME   = libtorus.a
+LIB      = libtorus.a
+SRC_DIR  = src/
+TEST_DIR = test/
 
-SRC  = statistics plot torus
-SRCS = $(addsuffix .cpp, $(SRC))
-OBJS = $(addsuffix .o, 	 $(SRC))
-SRCS_PREFIXED = $(addprefix src/, $(SRCS))
-
-OBJS_DIR = objs/
-OBJS_PREFIXED = $(addprefix $(OBJS_DIR), $(OBJS))
-
-$(OBJS_PREFIXED): $(SRCS_PREFIXED)
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) -c $(SRCS_PREFIXED)
-	mv *.o $(OBJS_DIR)
-
-$(NAME): $(OBJS_PREFIXED)
-	ar rcs $(NAME) $(OBJS_PREFIXED)
-
-all: $(NAME) 
+all:
+	$(MAKE) -C $(SRC_DIR) all
+	mv $(SRC_DIR)$(LIB) .
 
 clean:
-	rm -rf $(OBJS_DIR)
+	$(MAKE) -C $(SRC_DIR) clean
 
 fclean: clean
-	rm -f $(NAME)
+	$(MAKE) -C $(SRC_DIR) fclean
+	rm -f $(LIB)
 
 re: clean all
+
+tests:
+	$(MAKE) -C $(TEST_DIR) all
+
+clean_tests:
+	$(MAKE) -C $(TEST_DIR) fclean
