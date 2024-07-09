@@ -20,57 +20,110 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE. */
 
-#ifndef TORUS_STATISTICS_HPP
-#define TORUS_STATISTICS_HPP
+/**
+ * @file  statistics.h
+ * @brief Contains math statistics functions.
+ * 
+ * @author Alexander Kuzin (<a href="https://github.com/alkuzin">alkuzin</a>)
+ * @date   07.07.2024
+ */
 
-#include <algorithm>
-#include <numeric>
+#ifndef _TORUS_STATISTICS_HPP_
+#define _TORUS_STATISTICS_HPP_
+
+#include <stdexcept>
+#include <cstdint>
 #include <vector>
 #include <cmath>
-#include <map>
 
-namespace tlib
+
+namespace torus
 {
-	// measure of central tendency of a finite set of numbers
-	double mean(const std::vector<double> &data);
+	/**
+	 * @brief Calculate mean value of given data.
+	 * 
+	 * @param [in] data - given data.
+	 * @return mean value of @a data.
+	 */
+	template <typename T>
+	double mean(const std::vector<T> &data);
 
-	// middle value separating the greater and 
-	// lesser halves of a data set
-	double median(const std::vector<double> &data);
+	/**
+	 * @brief Calculate median of given data.
+	 * 
+	 * @param [in] data - given data.
+	 * @return middle value separating the greater and lesser halves of a data set.
+	 */
+	template <typename T>
+	double median(const std::vector<T> &data);
 
-	// most frequent value in a data set
-	double mode(const std::vector<double> &data);
+	/**
+	 * @brief Calculate most frequent value in a data set.
+	 * 
+	 * @param [in] data - given data.
+	 * @return mode of given @a data.
+	 */
+	template <typename T>
+	double mode(const std::vector<T> &data);
 
-	// measure of spread of data
-	double dispersion(const std::vector<double> &data);
+	/**
+	 * @brief Calculate measure of spread of given data.
+	 * 
+	 * @param [in] data - given data.
+	 * @return variance of @a data.
+	 */
+	template <typename T>
+	double variance(const std::vector<T> &data);
 
-	// measure of the amount of variation of a 
-	// random variable expected about its mean
-	double std_deviation(const std::vector<double> &data);
+	/**
+	 * @brief Calculate measure of the amount of variation of a
+	 * random variable expected about its mean.
+	 * 
+	 * @param [in] data - given data.
+	 * @return standard deviation of @a data.
+	 */
+	template <typename T>
+	double std(const std::vector<T> &data);
 
-	// cut points dividing the range of a probability distribution into 
-	// continuous intervals with equal probabilities
-	double quantile(std::vector<double> &data, const double quantile);
+	/**
+	 * @brief Calculate value that cut points dividing the range of
+	 * a probability distribution into continuous intervals with equal probabilities.
+	 * 
+	 * @param [in] data - given data.
+	 * @param [in] quantile - given quantile. 
+	 * @return quantile value.
+	 */
+	template <typename T>
+	double quantile(const std::vector<T> &data, const double quantile);
 	
-	// measure of statistical dispersion
-	double interquantile_range(std::vector<double> &data);
-
-	// A positive skewness means the tail on the right side 
-	// of the distribution is longer, while a negative skewness 
-	// indicates the tail on the left side is longer.
-	double skewness(std::vector<double> &data);
+	/**
+	 * @brief Calculate interquantile range.
+	 * 
+	 * @param [in] data - given data.
+	 * @return interquantile range of @a data.
+	 */
+	template <typename T>
+	double iqr(const std::vector<T> &data);
 	
-	// Normal distribution/Gaussian distribution is a type of 
-	// continuous probability distribution for a real-valued random variable.
-	double normal(double x, double mean, double std);
-
-    // standart error of the mean
-    double sem(const std::vector<double> &data);
-
-    // Student's t-distribution is a continuous probability distribution that 
-    // generalizes the standard normal distribution.
-    // t - t-value, v - degrees of freedom
-    double t_distribution(double t, double v);
+	/**
+	 * @brief Calculate skewness of given data.
+	 * 
+	 * @param [in] data - given data.
+	 * @return positive number - tail on the right side of the distribution is longer
+	 * @return negative number - tail on the left side of the distribution is longer
+	 * @return 0 - in case of normally distributed data.
+	 */
+	template <typename T>
+	double skew(const std::vector<T> &data);
+	
+	/**
+	 * @brief Calculate standart error of the mean.
+	 * 
+	 * @param [in] data - given data.
+	 * @return standart error of the mean of @a data.
+	 */
+	template <typename T>
+    double sem(const std::vector<T> &data);
 }
 
-#endif  // TORUS_STATISTICS_HPP
+#endif  // _TORUS_STATISTICS_HPP_
