@@ -20,31 +20,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE. */
 
-#ifndef _TORUS_PLOT_HPP_
-#define _TORUS_PLOT_HPP_
-
-#include <iostream>
-#include <cstdarg>
+#include <torus/plot.hpp>
 
 
 namespace torus
 {
-	class Plot
+	Plot::Plot(void) 
 	{
-		FILE *plot_pipe;
+		plot_pipe = nullptr;
+		_init();
+	}
 
-		public:
-			Plot(void);
-			Plot(const char *filename, int height, int width); // save as png 
-			~Plot();
-			
-			// execute gnuplot commands
-			void cmd(const char *fmt, ...);	
+	Plot::Plot(const char *filename, int height, int width) 
+	{
+		plot_pipe = nullptr;
+		_init();
 
-		private:
-			// initialize gnuplot
-			void _init(void);
-	};
+		cmd("set terminal png size %d,%d\n", height, width);
+		cmd("set output '%s'\n", filename);
+	}
+
+	void Plot::_init(void)
+	{
+		plot_pipe = popen("gnuplot -persistent", "w");
+	
+		if(!plot_pipe) {
+			perror("popen");
+			exit(EXIT_FAILURE);
+		}
+	}
+
+	void Plot::cmd(const char *fmt, ...) 
+	{
+		va_list args;
+
+		va_start(args, fmt);
+		vfprintf(plot_pipe, fmt, args);
+		va_end(args);
+	}
+
+	Plot::~Plot(void) 
+	{
+		cmd("q");
+		fflush(plot_pipe);
+		pclose(plot_pipe);
+	}
 }
-
-#endif // _TORUS_PLOT_HPP_
